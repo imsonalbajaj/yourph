@@ -60,19 +60,3 @@ struct SplashView: View {
         }
     }
 }
-
-class HomeViewController<Content: View>: UIHostingController<Content> {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-}
-
-struct HomeView: View {
-    var body: some View {
-        Text("You are at home")
-    }
-}
-
-#Preview {
-    SplashView()
-}
