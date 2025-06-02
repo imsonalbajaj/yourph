@@ -41,34 +41,32 @@ struct HomeView: View {
     }
     
     func initiateCall() {
-        fetchAccessToken { token in
-            guard let token = token else {
+        Task {
+            guard let token = await fetchAccessToken() else {
                 print("Failed to get token")
                 return
             }
-            
+
             let connectOptions = ConnectOptions(accessToken: token) { builder in
                 builder.params = ["To": phoneNumber]
             }
-            
+
             viewModel.call = TwilioVoiceSDK.connect(options: connectOptions, delegate: viewModel)
         }
     }
-    
-    func fetchAccessToken(completion: @escaping (String?) -> Void) {
+
+    func fetchAccessToken() async -> String? {
         guard let url = URL(string: "https://<your-firebase-url>/getTwilioToken") else {
-            completion(nil)
-            return
+            return nil
         }
-        
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            if let data = data,
-               let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let token = json["token"] as? String {
-                completion(token)
-            } else {
-                completion(nil)
-            }
-        }.resume()
+
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+            return json?["token"] as? String
+        } catch {
+            print("Token fetch error: \(error)")
+            return nil
+        }
     }
 }
