@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		57C85CC32DE9B39D00EF1EB7 /* TwilioVoice in Frameworks */ = {isa = PBXBuildFile; productRef = 57C85CC22DE9B39D00EF1EB7 /* TwilioVoice */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		57A6C9892DE0809D00D92EC9 /* yourph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yourph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57C85CC32DE9B39D00EF1EB7 /* TwilioVoice in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = yourph;
 			packageProductDependencies = (
+				57C85CC22DE9B39D00EF1EB7 /* TwilioVoice */,
 			);
 			productName = yourph;
 			productReference = 57A6C9892DE0809D00D92EC9 /* yourph.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 57A6C9802DE0809D00D92EC9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				57C85CC12DE9B39D00EF1EB7 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 57A6C98A2DE0809D00D92EC9 /* Products */;
 			projectDirPath = "";
@@ -147,6 +156,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = yourph/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs microphone access to make calls.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -175,6 +185,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = yourph/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs microphone access to make calls.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -246,7 +257,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -303,7 +314,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -335,6 +346,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		57C85CC12DE9B39D00EF1EB7 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/twilio-voice-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.13.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		57C85CC22DE9B39D00EF1EB7 /* TwilioVoice */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57C85CC12DE9B39D00EF1EB7 /* XCRemoteSwiftPackageReference "twilio-voice-ios" */;
+			productName = TwilioVoice;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 57A6C9812DE0809D00D92EC9 /* Project object */;
 }
