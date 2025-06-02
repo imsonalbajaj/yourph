@@ -18,6 +18,7 @@ class HomeViewController<Content: View>: UIHostingController<Content> {
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     @State private var phoneNumber: String = ""
+    @State private var showInvalidAlert = false
     
     var body: some View {
         VStack(spacing: 20) {
@@ -30,7 +31,11 @@ struct HomeView: View {
                 .padding(.horizontal)
             
             Button("Call") {
-                initiateCall()
+                if isValidPhoneNumber(phoneNumber) {
+                    initiateCall()
+                } else {
+                    showInvalidAlert = true
+                }
             }
             .padding()
             .buttonStyle(.borderedProminent)
@@ -38,35 +43,28 @@ struct HomeView: View {
             Spacer()
         }
         .padding()
+        .alert(isPresented: $showInvalidAlert) {
+            Alert(
+                title: Text("Invalid Phone Number"),
+                message: Text("Please enter a valid phone number in international or local format."),
+                dismissButton: .default(Text("OK"))
+            )
+        }
+    }
+    
+    func isValidPhoneNumber(_ number: String) -> Bool {
+        let pattern = #"^\+?[0-9]{7,15}$"#
+        return number.range(of: pattern, options: .regularExpression) != nil
     }
     
     func initiateCall() {
-        Task {
-            guard let token = await fetchAccessToken() else {
-                print("Failed to get token")
-                return
-            }
+        // Replace this with your manually generated Access Token string
+        let hardcodedToken = "<your-jwt-access-token>"
 
-            let connectOptions = ConnectOptions(accessToken: token) { builder in
-                builder.params = ["To": phoneNumber]
-            }
-
-            viewModel.call = TwilioVoiceSDK.connect(options: connectOptions, delegate: viewModel)
-        }
-    }
-
-    func fetchAccessToken() async -> String? {
-        guard let url = URL(string: "https://<your-firebase-url>/getTwilioToken") else {
-            return nil
+        let connectOptions = ConnectOptions(accessToken: hardcodedToken) { builder in
+            builder.params = ["To": phoneNumber]
         }
 
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-            return json?["token"] as? String
-        } catch {
-            print("Token fetch error: \(error)")
-            return nil
-        }
+        viewModel.call = TwilioVoiceSDK.connect(options: connectOptions, delegate: viewModel)
     }
 }
